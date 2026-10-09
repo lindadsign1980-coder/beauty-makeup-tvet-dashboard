@@ -61,6 +61,26 @@ h1 span{color:#a96b42}
 button{border:0;border-radius:10px;padding:11px 16px;background:var(--rose);color:white;font-weight:bold;cursor:pointer}
 button.secondary{background:#f8e9e4;color:#8d3448;border:1px solid #e9cbc3}
 footer{text-align:center;padding:20px;color:#9a7d77;font-size:11px;letter-spacing:1px}
+
+.booking-panel{margin-top:24px;background:linear-gradient(145deg,#fffdfb,#fff5f0);border:1px solid #e7c8bf;border-radius:22px;padding:clamp(18px,3vw,30px);box-shadow:0 10px 28px #7c3e3010}
+.booking-banner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:22px;padding:20px;border-radius:16px;background:linear-gradient(110deg,#f7e5df,#fff8f1 60%,#efd8c5);border:1px solid #e9c8b7}
+.booking-banner h2{font:clamp(26px,3vw,36px) Georgia,serif;color:var(--rose-dark);margin:0 0 7px}
+.booking-banner p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.booking-badge{border:1px solid #d7ad8d;border-radius:30px;padding:9px 13px;color:#8d5c3d;font-size:11px;letter-spacing:1px;background:#fffaf5}
+.booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.booking-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.booking-field.full{grid-column:1/-1}
+.booking-field label{font-size:12px;font-weight:bold;color:#6f4b47}
+.booking-field input,.booking-field select,.booking-field textarea{width:100%;padding:12px 13px;border:1px solid #e4c9c0;border-radius:11px;background:#fff;color:var(--ink);font:inherit;outline-color:#c66d7d}
+.booking-field textarea{min-height:94px;resize:vertical}
+.booking-help{font-size:11px;color:var(--muted);line-height:1.5}
+.booking-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.booking-submit{background:linear-gradient(110deg,#c66d7d,#8d3448);padding:13px 20px;box-shadow:0 6px 15px #8d344822}
+.booking-status{display:none;padding:13px 15px;border-radius:11px;margin-top:15px;font-size:13px;line-height:1.5}
+.booking-status.show{display:block}.booking-status.info{background:#fff4df;border:1px solid #efd5a5;color:#76541e}.booking-status.ok{background:#eaf7ed;border:1px solid #b9dfc0;color:#245d31}.booking-status.error{background:#fff0f0;border:1px solid #e8b9b9;color:#8b3030}
+.booking-note{margin-top:18px;padding:13px 15px;background:#fffaf7;border:1px dashed #dfb7a8;border-radius:12px;color:var(--muted);font-size:12px;line-height:1.6}
+@media(max-width:650px){.booking-grid{grid-template-columns:1fr}.booking-field.full{grid-column:auto}.booking-banner{align-items:flex-start}}
+
 @media(max-width:900px){.shell{grid-template-columns:175px minmax(0,1fr)}aside{padding:18px 10px}.cards{grid-template-columns:1fr}.hero-art{width:180px;height:110px;flex-basis:180px}}
 @media(max-width:600px){.shell{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #e9cfc6;padding:10px;display:block}.brandmark{padding:8px;border:0;margin:0}.brandmark span{display:none}nav{display:flex;overflow-x:auto}nav a{white-space:nowrap;padding:10px;font-size:13px}.aside-note{display:none}.hero-art{display:none}.hero{padding:22px}.content{padding:18px 12px}.checkpanel{padding:16px}.beauty-strip{height:80px}.progressside{flex-basis:100%}}
 </style>
@@ -75,6 +95,7 @@ footer{text-align:center;padding:20px;color:#9a7d77;font-size:11px;letter-spacin
     <a href="#tasks"><span class="navicon">▤</span>Tasks</a>
     <a href="#workshop"><span class="navicon">⚒</span>Workshop</a>
     <a href="#checklist"><span class="navicon">☑</span>Checklist</a>
+    <a href="#book-spa"><span class="navicon">♡</span>Book Your Spa</a>
   </nav>
   <div class="aside-note">“Beauty skills,<br>brighter future.” ♡</div>
 </aside>
@@ -116,6 +137,27 @@ footer{text-align:center;padding:20px;color:#9a7d77;font-size:11px;letter-spacin
       </div>
       <div class="actions"><button id="reset">Reset checklist</button><button class="secondary" id="copy">Copy checklist</button></div>
     </section>
+    <section class="booking-panel" id="book-spa">
+      <div class="booking-banner">
+        <div><h2>BOOK YOUR SPA</h2><p>Your moment of beauty and relaxation begins here.<br>Send an appointment request for our beauty and spa services.</p></div>
+        <div class="booking-badge">✧ BEAUTY • CARE • RELAX ✧</div>
+      </div>
+      <form id="spaBookingForm">
+        <div class="booking-grid">
+          <div class="booking-field"><label for="bookingName">Customer name *</label><input id="bookingName" name="customerName" autocomplete="name" required maxlength="120" placeholder="Enter your full name"></div>
+          <div class="booking-field"><label for="bookingPhone">Phone / WhatsApp *</label><input id="bookingPhone" name="phone" autocomplete="tel" required maxlength="40" placeholder="e.g. 0123456789"></div>
+          <div class="booking-field"><label for="bookingService">Beauty & spa service *</label><select id="bookingService" name="service" required><option value="">Select a service</option><optgroup label="Spa & Skin Care"><option>Signature Facial</option><option>Basic Facial</option><option>Relaxation Massage</option><option>Body Scrub</option><option>Body Spa Treatment</option><option>Foot Spa</option><option>Pedicure Spa</option><option>Manicure & Pedicure</option></optgroup><optgroup label="Makeup & Beauty"><option>Day Makeup</option><option>Evening Makeup</option><option>Bridal Makeup Consultation</option><option>Eyebrow Shaping</option><option>Beauty Consultation</option></optgroup><option>Other beauty/spa service</option></select></div>
+          <div class="booking-field"><label for="bookingDate">Preferred date *</label><input id="bookingDate" name="appointmentDate" type="date" required></div>
+          <div class="booking-field"><label for="bookingTime">Preferred time *</label><select id="bookingTime" name="appointmentTime" required><option value="">Select a time</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select></div>
+          <div class="booking-field"><label for="bookingContact">Preferred contact method</label><select id="bookingContact" name="contactMethod"><option>WhatsApp</option><option>Phone call</option><option>Email</option></select></div>
+          <div class="booking-field full"><label for="bookingNotes">Notes / special requests</label><textarea id="bookingNotes" name="notes" maxlength="1000" placeholder="Share any preferences or details we should know (optional)"></textarea></div>
+        </div>
+        <div class="booking-help" style="margin-top:12px">* Required fields. Your appointment is a request and is not confirmed until the spa contacts you.</div>
+        <div class="booking-actions"><button class="booking-submit" type="submit" id="bookingSubmit">Submit booking request</button><button class="secondary" type="reset">Clear form</button></div>
+        <div class="booking-status" id="bookingStatus" role="status" aria-live="polite"></div>
+      </form>
+      <div class="booking-note"><strong>Booking management:</strong> once Google Sheets is connected, each request can be recorded with a booking status such as <em>Pending, Confirmed, Completed</em> or <em>Cancelled</em>. Manage those statuses in the linked spreadsheet. The form is not connected until you complete the setup instructions.</div>
+    </section>
   </div>
   <footer>✧ TVET BEAUTY & MAKEUP DASHBOARD ✧</footer>
 </main>
@@ -130,6 +172,39 @@ function update(){const done=boxes.filter(b=>b.checked).length,pct=Math.round(do
 boxes.forEach(b=>b.addEventListener('change',update));
 document.getElementById('reset').addEventListener('click',()=>{boxes.forEach(b=>b.checked=false);update()});
 document.getElementById('copy').addEventListener('click',async()=>{const lines=boxes.map(b=>`${b.checked?'[x]':'[ ]'} ${b.parentElement.querySelector('strong').textContent}`);try{await navigator.clipboard.writeText('TVET Workshop Checklist\n'+lines.join('\n'));alert('Checklist copied.')}catch(e){alert(lines.join('\n'))}});
+
+// BOOK YOUR SPA — connect this form to a Google Apps Script Web App URL after setup.
+const GOOGLE_APPS_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const bookingForm = document.getElementById('spaBookingForm');
+const bookingStatus = document.getElementById('bookingStatus');
+const bookingSubmit = document.getElementById('bookingSubmit');
+const bookingDate = document.getElementById('bookingDate');
+const todayLocal = new Date();
+const localDate = new Date(todayLocal.getTime() - todayLocal.getTimezoneOffset() * 60000).toISOString().slice(0,10);
+bookingDate.min = localDate;
+function showBookingStatus(message, kind){bookingStatus.textContent=message;bookingStatus.className='booking-status show '+kind;}
+bookingForm.addEventListener('submit', async (event)=>{
+  event.preventDefault();
+  if (!bookingForm.reportValidity()) return;
+  if (GOOGLE_APPS_SCRIPT_URL.includes('PASTE_YOUR_')) {
+    showBookingStatus('Setup required: this form is not connected yet. Add your deployed Google Apps Script Web App URL in the HTML file before accepting real bookings. No booking data has been sent.', 'info');
+    return;
+  }
+  const data = Object.fromEntries(new FormData(bookingForm).entries());
+  data.bookingStatus = 'Pending';
+  data.submittedAt = new Date().toISOString();
+  bookingSubmit.disabled = true; bookingSubmit.textContent = 'Sending request…';
+  try {
+    // Apps Script Web Apps commonly use a simple form-encoded POST. no-cors prevents reading the response;
+    // therefore this UI cannot verify that the spreadsheet received the booking.
+    await fetch(GOOGLE_APPS_SCRIPT_URL, {method:'POST', mode:'no-cors', body:new URLSearchParams(data)});
+    showBookingStatus('Your request was sent to the configured endpoint. This page cannot verify spreadsheet delivery; check the Google Sheet before treating the booking as received or confirmed.', 'info');
+    bookingForm.reset(); bookingDate.min = localDate;
+  } catch (err) {
+    showBookingStatus('We could not send the request. Please contact the spa directly or try again later. No successful delivery has been verified.', 'error');
+  } finally { bookingSubmit.disabled = false; bookingSubmit.textContent = 'Submit booking request'; }
+});
+
 </script>
 </body>
 </html>
